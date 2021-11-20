@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:you_bike_app/geo_utils/flutter_map_widget.dart';
 import 'package:you_bike_app/geo_utils/geo_determine_position.dart';
+import 'package:latlong2/latlong.dart';
 
 void main() {
   runApp(MyApp());
@@ -39,15 +39,16 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     // setMarkerOnPressed(context);
     return Scaffold(
-        extendBodyBehindAppBar: true,
-        body: FlutterMapWidget(mapController: _mapController),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            Position p = await GeoDeterminePosition.getMyCurrentLocation();
-            // _mapController.move(LatLng(p.latitude, p.longitude), 15.0);
-            _mapController.move(LatLng(25.033964, 121.564468), 15.0);
-          },
-          child: Icon(Icons.location_searching),
-        ));
+      extendBodyBehindAppBar: true,
+      body: SafeArea(child: FlutterMapWidget(mapController: _mapController)),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          Position p = await GeoDeterminePosition.getMyCurrentLocation();
+          // _mapController.move(LatLng(p.latitude, p.longitude), 15.0);
+          _mapController.move(LatLng(25.033964, 121.564468), 15.0);
+        },
+        child: Icon(Icons.location_searching),
+      ),
+    );
   }
 }
