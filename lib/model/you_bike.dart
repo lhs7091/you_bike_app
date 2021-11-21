@@ -14,23 +14,24 @@ class YouBike {
   final String snaen; //영어 역이름
   final String aren; // 영어주소
   final String act; // 활성 비활성코드
+  final String srcUpdateTime; // 소스 업데이트 시간
   Marker? marker;
 
-  YouBike({
-    required this.sno,
-    required this.sna,
-    required this.tot,
-    required this.sbi,
-    required this.sarea,
-    required this.mday,
-    required this.lat,
-    required this.lng,
-    required this.ar,
-    required this.sareaen,
-    required this.snaen,
-    required this.aren,
-    required this.act,
-  });
+  YouBike(
+      {required this.sno,
+      required this.sna,
+      required this.tot,
+      required this.sbi,
+      required this.sarea,
+      required this.mday,
+      required this.lat,
+      required this.lng,
+      required this.ar,
+      required this.sareaen,
+      required this.snaen,
+      required this.aren,
+      required this.act,
+      required this.srcUpdateTime});
 
   static YouBike fromJson(Map<dynamic, dynamic> json) => YouBike(
       sno: json['sno'],
@@ -45,5 +46,6 @@ class YouBike {
       sareaen: json['sareaen'],
       snaen: json['snaen'],
       aren: json['aren'],
-      act: json['act']);
+      act: json['act'],
+      srcUpdateTime: json['srcUpdateTime']);
 }

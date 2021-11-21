@@ -20,8 +20,10 @@ class YouBikeApi extends GetxController {
       final List youBikes = json.decode(response.body);
       print(youBikes);
 
-      this.youBikeList.value =
-          youBikes.map((json) => YouBike.fromJson(json)).toList();
+      this.youBikeList.value = youBikes
+          .map((json) => YouBike.fromJson(json))
+          .where((element) => element.act == "1")
+          .toList();
 
       return youBikes.map((json) => YouBike.fromJson(json)).toList();
     } else {

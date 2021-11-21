@@ -50,18 +50,11 @@ class TabWidget extends StatelessWidget {
             ],
           ),
           Text(
-            "updateTime : ${youBike!.mday}",
+            "updateTime : ${youBike!.srcUpdateTime}",
             style: TextStyle(color: Colors.white, fontSize: 15),
           ),
-          // _showBikeStock(),
         ],
       ),
-      // child: youBike != null
-      //     ? Text('場站中文名稱 : ' +
-      //         '${youBike!.sna.substring(subStrLeng)}' +
-      //         '\n' +
-      //         '${youBike!.snaen.substring(subStrLeng)}')
-      //     : Text(""),
     );
   }
 }
