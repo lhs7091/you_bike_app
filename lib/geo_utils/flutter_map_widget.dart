@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:you_bike_app/api/you_bike_api.dart';
 import 'package:you_bike_app/geo_utils/tab_widget.dart';
@@ -21,6 +23,7 @@ class FlutterMapWidget extends StatefulWidget {
 }
 
 class _FlutterMapWidgetState extends State<FlutterMapWidget> {
+  YouBikeApi youBikeApi = Get.find();
   late MapController _mapController;
   ScrollController scrollController = ScrollController();
   Position? position;
@@ -40,7 +43,7 @@ class _FlutterMapWidgetState extends State<FlutterMapWidget> {
     super.initState();
     _mapController = widget.mapController;
     _getMyCurrentLocation();
-    _getYouBikeList();
+    youBikeList = youBikeApi.youBikeList;
     new Timer.periodic(
         Duration(seconds: 5), (Timer t) => _getMyCurrentLocation());
   }
@@ -170,17 +173,8 @@ class _FlutterMapWidgetState extends State<FlutterMapWidget> {
 
   void moveMyLocation() {
     setState(() {
-      // _mapController.move(LatLng(25.033964, 121.564468), 15.0);
       _mapController.move(
           LatLng(position!.latitude, position!.longitude), 15.0);
     });
-  }
-
-  _getYouBikeList() async {
-    await YouBikeApi.getYouBikeList().then((List<YouBike> _youBikeList) => {
-          setState(() {
-            youBikeList = _youBikeList;
-          })
-        });
   }
 }

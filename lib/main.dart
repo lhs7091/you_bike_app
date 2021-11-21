@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
+import 'package:you_bike_app/api/you_bike_api.dart';
 import 'package:you_bike_app/geo_utils/flutter_map_widget.dart';
 import 'package:you_bike_app/geo_utils/geo_determine_position.dart';
 import 'package:latlong2/latlong.dart';
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       home: MyHomePage(),
@@ -28,6 +30,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   MapController _mapController = MapController();
+  YouBikeApi youBikeApi = Get.put(YouBikeApi());
 
   @override
   void initState() {
@@ -62,9 +65,9 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  refreshBtn() {
-    Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (BuildContext context) => super.widget));
+  refreshBtn() async {
+    // List<YouBike> _youBikeList = await YouBikeApi.getYouBikeList();
+    youBikeApi.getYouBikeList();
   }
 
   getCurrentLocationBtn() async {
