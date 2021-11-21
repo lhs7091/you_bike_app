@@ -37,18 +37,39 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // setMarkerOnPressed(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
-      body: SafeArea(child: FlutterMapWidget(mapController: _mapController)),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          Position p = await GeoDeterminePosition.getMyCurrentLocation();
-          // _mapController.move(LatLng(p.latitude, p.longitude), 15.0);
-          _mapController.move(LatLng(25.033964, 121.564468), 15.0);
-        },
-        child: Icon(Icons.location_searching),
+      body: FlutterMapWidget(mapController: _mapController),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
+      floatingActionButton: Column(
+        children: [
+          buildFloatingActionBtn(context, refreshBtn, Icons.refresh),
+          SizedBox(height: 10),
+          buildFloatingActionBtn(
+              context, getCurrentLocationBtn, Icons.location_searching)
+        ],
       ),
     );
+  }
+
+  Widget buildFloatingActionBtn(
+      BuildContext context, VoidCallback function, IconData icons) {
+    return FloatingActionButton(
+      onPressed: function,
+      child: Icon(icons),
+      backgroundColor: Colors.black38,
+      hoverColor: Colors.white,
+    );
+  }
+
+  refreshBtn() {
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (BuildContext context) => super.widget));
+  }
+
+  getCurrentLocationBtn() async {
+    Position p = await GeoDeterminePosition.getMyCurrentLocation();
+    _mapController.move(LatLng(p.latitude, p.longitude), 15.0);
+    // _mapController.move(LatLng(25.033964, 121.564468), 15.0);
   }
 }
