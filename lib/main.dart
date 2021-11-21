@@ -3,9 +3,12 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:you_bike_app/api/you_bike_api.dart';
+import 'package:you_bike_app/geo_utils/favorite_card_widget.dart';
 import 'package:you_bike_app/geo_utils/flutter_map_widget.dart';
 import 'package:you_bike_app/geo_utils/geo_determine_position.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:you_bike_app/geo_utils/hero_dialog_router.dart';
+import 'package:you_bike_app/geo_utils/utils.dart';
 
 void main() {
   runApp(MyApp());
@@ -46,26 +49,30 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
       floatingActionButton: Column(
         children: [
-          buildFloatingActionBtn(context, refreshBtn, Icons.refresh),
+          buildFloatingActionBtn(context, refreshBtn, Icons.refresh, null),
           SizedBox(height: 10),
           buildFloatingActionBtn(
-              context, getCurrentLocationBtn, Icons.location_searching)
+              context, getCurrentLocationBtn, Icons.location_searching, null),
+          SizedBox(height: 10),
+          buildFloatingActionBtn(
+              context, favoriteBtn, Icons.favorite, CommonUtil.favoriteTag),
         ],
       ),
     );
   }
 
-  Widget buildFloatingActionBtn(
-      BuildContext context, VoidCallback function, IconData icons) {
+  Widget buildFloatingActionBtn(BuildContext context, VoidCallback function,
+      IconData icons, Text? heroTag) {
     return FloatingActionButton(
       onPressed: function,
       child: Icon(icons),
       backgroundColor: Colors.black38,
       hoverColor: Colors.white,
+      heroTag: heroTag,
     );
   }
 
-  refreshBtn() async {
+  refreshBtn() {
     // List<YouBike> _youBikeList = await YouBikeApi.getYouBikeList();
     youBikeApi.getYouBikeList();
   }
@@ -74,5 +81,11 @@ class _MyHomePageState extends State<MyHomePage> {
     Position p = await GeoDeterminePosition.getMyCurrentLocation();
     _mapController.move(LatLng(p.latitude, p.longitude), 15.0);
     // _mapController.move(LatLng(25.033964, 121.564468), 15.0);
+  }
+
+  favoriteBtn() {
+    Navigator.of(context).push(HeroDialogRoute(builder: (context) {
+      return FavoriteCardWidet(mapController: _mapController);
+    }));
   }
 }

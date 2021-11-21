@@ -1,14 +1,18 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:you_bike_app/model/you_bike.dart';
 import 'package:get/get.dart';
 
 class YouBikeApi extends GetxController {
   final youBikeList = <YouBike>[].obs;
+  final favoriteList = <String>[].obs;
+  final selectedYouBikeSno = RxString("");
 
   onInit() {
     getYouBikeList();
+    getFavoriteList();
   }
 
   Future<List<YouBike>> getYouBikeList() async {
@@ -29,5 +33,33 @@ class YouBikeApi extends GetxController {
     } else {
       throw Exception();
     }
+  }
+
+  getFavoriteList() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    List<String>? _favoriteList = pref.getStringList("favorite");
+    if (_favoriteList != null) {
+      this.favoriteList.value = _favoriteList;
+    }
+  }
+
+  updateFavoriteList(String sno) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    if (this.favoriteList.value.contains(sno)) {
+      this.favoriteList.value.remove(sno);
+    } else {
+      this.favoriteList.value.add(sno);
+    }
+    pref.setStringList("favorite", this.favoriteList);
+    update();
+  }
+
+  setSelectedYouBike(String selectedSno) {
+    selectedYouBikeSno.value = selectedSno;
+    update();
+  }
+
+  YouBike getOneYouBike(String sno) {
+    return this.youBikeList.firstWhere((element) => element.sno == sno);
   }
 }

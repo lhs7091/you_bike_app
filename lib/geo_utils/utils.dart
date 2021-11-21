@@ -9,4 +9,22 @@ class CommonUtil {
             ? Colors.orangeAccent
             : Colors.redAccent;
   }
+
+  /// Dark background color.
+  static const Color backgroundColor = Color(0xFF191D1F);
+
+  /// Slightly lighter version of [backgroundColor].
+  static const Color backgroundFadedColor = Color(0xFF191B1C);
+
+  /// Color used for cards and surfaces.
+  static const Color cardColor = Color(0xFF1F2426);
+
+  /// Accent color used in the application.
+  static const Color accentColor = Color(0xFFef8354);
+
+  /// Favorite hero tag
+  static const Text favoriteTag = Text("favorite");
+
+  /// subString
+  static const int subStrLeng = 'YouBike2.0_'.length;
 }

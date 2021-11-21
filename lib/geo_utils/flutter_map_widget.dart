@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:you_bike_app/api/you_bike_api.dart';
 import 'package:you_bike_app/geo_utils/tab_widget.dart';
@@ -93,14 +92,11 @@ class _FlutterMapWidgetState extends State<FlutterMapWidget> {
                             controller: myscrollController,
                             itemCount: 1,
                             itemBuilder: (BuildContext context, int index) {
-                              return selectedYouBike != null
-                                  ? TabWidget(youBike: selectedYouBike)
+                              return youBikeApi.selectedYouBikeSno.value != ""
+                                  ? TabWidget(
+                                      youBike: youBikeApi.getOneYouBike(
+                                          youBikeApi.selectedYouBikeSno.value))
                                   : Container();
-                              // return ListTile(
-                              //     title: Text(
-                              //   'Dish $index' + '${selectedYouBike!.sna}',
-                              //   style: TextStyle(color: Colors.black54),
-                              // ));
                             },
                           ),
                         );
@@ -143,6 +139,7 @@ class _FlutterMapWidgetState extends State<FlutterMapWidget> {
             builder: (ctx) => Container(
               child: IconButton(
                 onPressed: () {
+                  youBikeApi.setSelectedYouBike(_youBike.sno);
                   setState(() {
                     selectedYouBike = _youBike;
                   });
@@ -151,11 +148,8 @@ class _FlutterMapWidgetState extends State<FlutterMapWidget> {
                   Icons.location_on,
                 ),
                 color: CommonUtil.getColor(_youBike),
-                iconSize: selectedYouBike == null
-                    ? 20
-                    : _youBike.sno == selectedYouBike!.sno
-                        ? 30
-                        : 20,
+                iconSize:
+                    youBikeApi.selectedYouBikeSno == _youBike.sno ? 50 : 20,
               ),
             ),
           );
