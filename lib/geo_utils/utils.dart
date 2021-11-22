@@ -25,6 +25,9 @@ class CommonUtil {
   /// Favorite hero tag
   static const Text favoriteTag = Text("favorite");
 
+  /// Station info hero tag
+  static const Text stationTag = Text("station");
+
   /// subString
   static const int subStrLeng = 'YouBike2.0_'.length;
 }

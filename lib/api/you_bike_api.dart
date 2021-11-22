@@ -45,10 +45,10 @@ class YouBikeApi extends GetxController {
 
   updateFavoriteList(String sno) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    if (this.favoriteList.value.contains(sno)) {
-      this.favoriteList.value.remove(sno);
+    if (this.favoriteList.contains(sno)) {
+      this.favoriteList.remove(sno);
     } else {
-      this.favoriteList.value.add(sno);
+      this.favoriteList.add(sno);
     }
     pref.setStringList("favorite", this.favoriteList);
     update();
