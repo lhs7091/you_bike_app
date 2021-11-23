@@ -10,6 +10,7 @@ class YouBikeApi extends GetxController {
   final favoriteList = <String>[].obs;
   final selectedYouBikeSno = RxString("");
 
+  // ignore: must_call_super
   onInit() {
     getYouBikeList();
     getFavoriteList();

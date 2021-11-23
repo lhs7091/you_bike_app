@@ -64,7 +64,7 @@ class _FavoriteCardWidetState extends State<FavoriteCardWidet> {
                                   Navigator.of(context).pop();
                                 },
                                 child: Text(
-                                  "${youBike.sna.substring(CommonUtil.subStrLeng)}",
+                                  "${youBike.sna}",
                                   style: TextStyle(
                                     color: Colors.white60,
                                     fontSize: 30,

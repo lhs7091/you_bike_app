@@ -48,3 +48,4 @@ app.*.map.json
 
 # key password
 key.properties
+/lib/secret

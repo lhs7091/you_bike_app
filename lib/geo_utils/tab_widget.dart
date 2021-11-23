@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:you_bike_app/api/you_bike_api.dart';
 import 'package:you_bike_app/geo_utils/custom_react_tween.dart';
@@ -52,7 +51,7 @@ class _TabWidgetState extends State<TabWidget> {
                         SizedBox(width: 20),
                         Flexible(
                           child: Text(
-                            '${widget.youBike.sna.substring(CommonUtil.subStrLeng)}',
+                            '${widget.youBike.sna}',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 30,
@@ -75,7 +74,7 @@ class _TabWidgetState extends State<TabWidget> {
                           ),
                           Flexible(
                             child: Text(
-                              '${widget.youBike.snaen.substring(CommonUtil.subStrLeng)}',
+                              '${widget.youBike.snaen}',
                               style:
                                   TextStyle(color: Colors.white, fontSize: 18),
                               maxLines: 3,
@@ -123,19 +122,6 @@ class _TabWidgetState extends State<TabWidget> {
                                     color: Colors.white,
                                     size: 30,
                                   ),
-                                ),
-                                IconButton(
-                                  onPressed: () {
-                                    Clipboard.setData(ClipboardData(
-                                        text:
-                                            "${widget.youBike.sna.substring(CommonUtil.subStrLeng)}"));
-                                  },
-                                  icon: Icon(
-                                    Icons.copy,
-                                    color: Colors.white,
-                                    size: 30,
-                                  ),
-                                  hoverColor: Colors.white,
                                 ),
                               ],
                             ),

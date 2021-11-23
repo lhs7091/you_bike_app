@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -17,7 +15,7 @@ class _AdMobApiState extends State<AdMobApi> {
   void initState() {
     super.initState();
     bannerAd = BannerAd(
-        listener: BannerAdListener(),
+        listener: AdListener(),
         size: AdSize.banner,
         adUnitId: BannerAd.testAdUnitId,
         request: AdRequest())
@@ -29,5 +27,11 @@ class _AdMobApiState extends State<AdMobApi> {
     return Container(
       child: this.bannerAd == null ? Container() : AdWidget(ad: this.bannerAd!),
     );
+  }
+
+  @override
+  void dispose() {
+    bannerAd?.dispose();
+    super.dispose();
   }
 }

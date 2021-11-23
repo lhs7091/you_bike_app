@@ -1,4 +1,5 @@
 import 'package:flutter_map/flutter_map.dart';
+import 'package:you_bike_app/geo_utils/utils.dart';
 
 class YouBike {
   final String sno; // 사이트 코드
@@ -35,7 +36,7 @@ class YouBike {
 
   static YouBike fromJson(Map<dynamic, dynamic> json) => YouBike(
       sno: json['sno'],
-      sna: json['sna'],
+      sna: json['sna'].toString().substring(CommonUtil.subStrLeng),
       tot: json['tot'],
       sbi: json['sbi'],
       sarea: json['sarea'],

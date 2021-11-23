@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:you_bike_app/api/you_bike_api.dart';
 import 'package:you_bike_app/geo_utils/favorite_card_widget.dart';
 import 'package:you_bike_app/geo_utils/flutter_map_widget.dart';
@@ -12,8 +11,6 @@ import 'package:you_bike_app/geo_utils/hero_dialog_router.dart';
 import 'package:you_bike_app/geo_utils/utils.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
   runApp(MyApp());
 }
 

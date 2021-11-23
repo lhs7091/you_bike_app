@@ -41,7 +41,7 @@ dependencies:
 
   shared_preferences: ^2.0.9
 
-  google_mobile_ads: 0.13.6
+  google_mobile_ads: 0.12.1
 
 dev_dependencies:
   flutter_test:
