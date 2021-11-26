@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:maps_launcher/maps_launcher.dart';
 import 'package:you_bike_app/api/you_bike_api.dart';
 import 'package:you_bike_app/geo_utils/custom_react_tween.dart';
 import 'package:you_bike_app/geo_utils/utils.dart';
@@ -122,6 +123,20 @@ class _TabWidgetState extends State<TabWidget> {
                                     color: Colors.white,
                                     size: 30,
                                   ),
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    MapsLauncher.launchCoordinates(
+                                        widget.youBike.lat,
+                                        widget.youBike.lng,
+                                        '${widget.youBike.sna}');
+                                  },
+                                  icon: Icon(
+                                    Icons.map,
+                                    color: Colors.white,
+                                    size: 30,
+                                  ),
+                                  hoverColor: Colors.white,
                                 ),
                               ],
                             ),
