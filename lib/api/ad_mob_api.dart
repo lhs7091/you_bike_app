@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:you_bike_app/geo_utils/utils.dart';
+import 'package:you_bike_app/secret/api_key.dart';
 
 class AdMobApi extends StatefulWidget {
   const AdMobApi({Key? key}) : super(key: key);
@@ -17,7 +19,7 @@ class _AdMobApiState extends State<AdMobApi> {
     bannerAd = BannerAd(
         listener: AdListener(),
         size: AdSize.banner,
-        adUnitId: BannerAd.testAdUnitId,
+        adUnitId: admobKey,
         request: AdRequest())
       ..load();
   }
